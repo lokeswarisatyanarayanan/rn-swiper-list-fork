@@ -225,7 +225,11 @@ const SwipeableCard = forwardRef(function SwipeableCard<T>(
       // Use activeIndex.value directly in worklet context
       const currentActive = Math.floor(activeIndex.value);
       if (currentActive !== index) return;
-      if (onSwipeActive) scheduleOnRN(onSwipeActive);
+      if (onSwipeActive)
+        scheduleOnRN(onSwipeActive, {
+          translateX: event.translationX,
+          translateY: event.translationY,
+        });
 
       translateX.value = event.translationX;
       translateY.value = event.translationY;
